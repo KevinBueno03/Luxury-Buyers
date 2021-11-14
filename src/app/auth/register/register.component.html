@@ -1,0 +1,54 @@
+<div style="margin-top: 70px">
+    <div class="" style="text-align: center; vertical-align: middle">
+        <div class="login-content">
+            <form (ngSubmit)="guardarBuyer()">
+                <div class="morad py-2">
+                    <h1>Registrate</h1>
+                    <h4>¡Claro que tienes estilo...!</h4>
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <input class="" type="text" placeholder="Nombre Completo" name="name" [(ngModel)]="buyerRegistro.name">
+                    </div>
+                </div>
+
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="div">
+                        <input type="text" placeholder="Correo Electronico" name="email" [(ngModel)]="buyerRegistro.email">
+                    </div>
+                </div>
+
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <input class="" type="password" placeholder="Contraseña" name="password" [(ngModel)]="buyerRegistro.password">
+                    </div>
+                </div>
+
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <input class="" type="password" placeholder="Confirme su Contraseña" name="confPass" [(ngModel)]="confPass">
+                    </div>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="validacion">
+                    <!-- espacio para alerta de campos -->
+                </div>
+                <a class="pb-3">¿Olvidaste tu contraseña?</a>
+                <button class="btn-lux" style type="button" (click)="guardarBuyer()">Registrarme</button>
+                <a class="morad mt-5" routerLink="['sign-up']" style="margin-top: 10px;">Ya tienes una cuenta? <span style="color: black; font-weight: bold">Iniciar Sesion
+                <i class="fas fa-arrow-right"></i></span> </a>
+            </form>
+        </div>
+    </div>
+</div>

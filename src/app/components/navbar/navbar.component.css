@@ -1,0 +1,23 @@
+/* paleta de colores
+#6B45B6 morado
+#FFB800 dorado
+#838383 grisaceo
+*/
+
+.navbar-brand img {
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.offcanvas-header img {
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.bg-morado {
+    background-color: #6B45B6 !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
