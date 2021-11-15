@@ -14,6 +14,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavfooterbarComponent } from './components/navfooterbar/navfooterbar.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,11 @@ import { NavfooterbarComponent } from './components/navfooterbar/navfooterbar.co
     OrdersComponent,
     LandingComponent,
     NavbarComponent,
-    NavfooterbarComponent
+    NavfooterbarComponent,
+    AboutUsComponent,
+    CategoriesComponent,
+    WishListComponent,
+    ProfileUserComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +43,9 @@ import { NavfooterbarComponent } from './components/navfooterbar/navfooterbar.co
     RouterModule,
     HttpClientModule,
     NgbModule,
-    NgxPopper
+    NgxPopper,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

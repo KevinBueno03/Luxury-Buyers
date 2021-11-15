@@ -1,0 +1,43 @@
+/* paleta de colores
+#6B45B6 morado
+#FFB800 dorado
+#838383 grisaceo
+*/
+
+.html,
+body {
+    /* Para que funcione correctamente en Smartphones y Tablets */
+    height: 100vh;
+}
+
+.bg-gris {
+    background-color: #ededed !important;
+}
+
+.gris {
+    color: #838383 !important;
+}
+
+.morad {
+    color: #6B45B6 !important;
+}
+
+.dorad {
+    color: #FFB800 !important;
+}
+
+li.active {
+    color: #6B45B6 !important;
+}
+
+li {
+    color: #838383 !important;
+}
+
+li:hover {
+    color: #6B45B6 !important;
+}
+
+nav.shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+}
