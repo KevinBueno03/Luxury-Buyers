@@ -1,0 +1,9 @@
+.product-title {
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.bg-gris {
+    background-color: #ededed !important;
+    border-radius: 10px;
+}

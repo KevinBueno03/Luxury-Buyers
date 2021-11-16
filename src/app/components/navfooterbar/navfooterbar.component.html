@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand bg-gris fixed-bottom shadow">
     <div class="">
         <ul class="navbar-nav mt-2">
-            <li class="nav-item" (ngModel)="categorias" style="margin-right: 17%" (click)="cambiarActiveIcon(0)" routerLink="categories">
+            <li class="nav-item" (ngModel)="categorias" style="margin-right: 27%" (click)="cambiarActiveIcon(0)" routerLink="categories">
                 <div class="text-center" [ngClass]="{'morad': categorias==true, 'grisaceo': categorias==false}">
                     <div class="py-0">
                         <i class="fa fa-list-ul fa-2x"></i>
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="ordenes" style="margin-right: 19%" (click)="cambiarActiveIcon(1)" routerLink="orders">
+            <li class="nav-item" (ngModel)="ordenes" style="margin-right: 27%" (click)="cambiarActiveIcon(1)" routerLink="orders">
                 <div class="text-center" [ngClass]="{'morad': ordenes==true, 'grisaceo': ordenes==false}">
                     <div class="py-0">
                         <i class="fa fa-shipping-fast fa-2x"></i>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="deseos" style="margin-right: 22%" (click)="cambiarActiveIcon(2)" routerLink="wish-list">
+            <li class="nav-item" (ngModel)="deseos" style="margin-right: 27%" (click)="cambiarActiveIcon(2)" routerLink="wish-list">
                 <div class="text-center" [ngClass]="{'morad': deseos==true, 'grisaceo': deseos==false}">
                     <div class="py-0">
                         <i class="fa fa-heart fa-2x"></i>
@@ -33,9 +33,7 @@
             </li>
             <li class="nav-item" (ngModel)="perfil" (click)="cambiarActiveIcon(3)" routerLink="profile-user">
                 <div class="text-center" [ngClass]="{'morad': perfil==true, 'grisaceo': perfil==false}">
-                    <div class="py-0" style="border-radius: 50%;">
-                        <i class="fa fa-user fa-2x"></i>
-                    </div>
+                    <img class="py-0 img-bar">
                     <div class="py-0">
                         <span>Perfil</span>
                     </div>

@@ -1,1 +1,55 @@
-<p>orders works!</p>
+<div class="container-fluid" style="padding-bottom:110px; margin-top:10px">
+    <div class="row">
+        <div class="col">
+            <h2 class="morad mb-0">Mis Ordenes <span class="text-muted" style="font-size: small;">({{collectionSize}})</span></h2>
+        </div>
+    </div>
+    <hr>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let country of countries">
+                <div class="card mb-3 px-0 bg-gris" style="max-width: 384px;">
+                    <div class="card-body py-0">
+                        <div class="row">
+                            <div class="col-6 px-0">
+                                <h5 class="product-title">Detalle Orden</h5>
+                                <div style="margin-left: 5%;">
+                                    <h5>Orden #FCD-250</h5>
+                                </div>
+                                <h5 class="product-title">Monto total</h5>
+                                <div style="margin-left: 5%;">
+                                    <h5>$ 717.25</h5>
+                                </div>
+                                <h5 class="product-title">Cantidad Articulos</h5>
+                                <div style="margin-left: 5%;">
+                                    <h5>5</h5>
+                                </div>
+                            </div>
+                            <div class="col-6 px-0">
+                                <h5 class="product-title">Estado Orden</h5>
+                                <div style="margin-left: 5%;">
+                                    <h5>Pendiente</h5>
+                                </div>
+                                <h5 class="product-title">Direccion Entrega</h5>
+                                <div style="margin-left: 5%;">
+                                    <h5>Col. Tepeyac, contiguo a la pulperia La Bendicion, Bloque C, casa #1695</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="justify-content p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+        </select>
+    </div>
+</div>

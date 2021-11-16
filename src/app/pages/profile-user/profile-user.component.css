@@ -1,0 +1,12 @@
+.lista {
+    background-size: cover;
+    width: 270px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    height: 270px;
+}
+
+.product-title {
+    font-weight: bolder;
+}

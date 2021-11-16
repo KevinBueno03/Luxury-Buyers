@@ -1,0 +1,18 @@
+.lista {
+    background-size: cover;
+    max-width: 384px;
+    border-radius: 10px;
+}
+
+.product-title {
+    font-weight: bolder;
+    font-size: 36px;
+    color: #fff;
+}
+
+.categoria-arrow {
+    font-weight: bolder;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 0px;
+}

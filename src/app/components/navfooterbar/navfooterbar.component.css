@@ -38,6 +38,11 @@ li:hover {
     color: #6B45B6 !important;
 }
 
-nav.shadow {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+.img-bar {
+    border-radius: 50%;
+    background-image: url('../../../assets/img/profiles/perfil.jfif');
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    outline: solid;
 }

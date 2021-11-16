@@ -1,1 +1,35 @@
-<p>categories works!</p>
+<div class="container-fluid" style="padding-bottom:110px; margin-top:10px">
+    <div class="row">
+        <div class="col">
+            <h2 class="morad mb-0">Mis Ordenes <span class="text-muted" style="font-size: small;">({{collectionSize}})</span></h2>
+        </div>
+    </div>
+    <hr>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let country of countries">
+                <div class="card mb-3 p-0 bg-light lista shadow" style="background-image: url(../../../assets/img/categories/joyeria.jpg);">
+                    <div class="card-body pt-2">
+                        <div class="row">
+                            <h1 class="product-title pt-2">Joyerias</h1>
+                        </div>
+                        <div class="row text-right mb-0">
+                            <h2 class="categoria-arrow"><a href="" style="color: #fff"><i class="fa fa-long-arrow-alt-right fa-2x"></i></a></h2>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="justify-content p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
+</div>
