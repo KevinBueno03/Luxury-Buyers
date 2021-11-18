@@ -19,7 +19,11 @@ export class LoginComponent {
   constructor(private BuyerService:BuyerService, private Router: Router) { }
 
   iniciarSesion(){
-    console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
+    this.BuyerService.login(this.buyerLogin.email, this.buyerLogin.password)
+    .subscribe( resp =>{
+      console.log(resp);
+    })
+    //console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
   }
 
 }

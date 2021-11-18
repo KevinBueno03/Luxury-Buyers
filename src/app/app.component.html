@@ -1,3 +1,7 @@
+<div *ngIf="onBuyerLogged == false">
+    <app-navbar></app-navbar>
+</div>
+<div *ngIf="onBuyerLogged == true">
+    <app-navfooterbar></app-navfooterbar>
+</div>
 <router-outlet></router-outlet>
-<app-navbar></app-navbar>
-<!-- <app-navfooterbar></app-navfooterbar> -->

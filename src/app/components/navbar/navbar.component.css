@@ -10,8 +10,16 @@
 }
 
 .offcanvas-header img {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 70px;
+    max-height: 70px;
+}
+
+.offcanvas-header {
+    background-color: #6B45B6;
+}
+
+.offcanvas-body {
+    background-color: #ffffff;
 }
 
 .bg-morado {
@@ -20,4 +28,11 @@
 
 .navbar-toggler:focus {
     box-shadow: none !important;
+}
+
+.cl-morado {
+    color: #6B45B6 !important;
+    font-size: 36px;
+    padding-left: 35px;
+    padding-bottom: 35px;
 }

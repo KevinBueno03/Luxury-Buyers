@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPopper } from 'angular-popper';
 import { AppComponent } from './app.component';
@@ -39,13 +39,14 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule,
     RouterModule,
     HttpClientModule,
     NgbModule,
     NgxPopper,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
