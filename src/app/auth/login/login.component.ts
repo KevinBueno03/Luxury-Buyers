@@ -8,22 +8,21 @@ import { BuyerService } from '../../services/buyer.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  validacion = false;
   @Input() buyerLogin= {
     email: '',
     password: ''
   };
-  public status: boolean = false;
-  public validacion: boolean = false;
 
-  constructor(private BuyerService:BuyerService, private Router: Router) { }
+  constructor(private BuyerService:BuyerService, private router: Router) { }
 
   iniciarSesion(){
+    console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
     this.BuyerService.login(this.buyerLogin.email, this.buyerLogin.password)
     .subscribe( resp =>{
       console.log(resp);
+      window.location.reload();
     })
-    //console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
   }
 
 }

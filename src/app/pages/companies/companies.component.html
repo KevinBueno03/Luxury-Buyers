@@ -1,0 +1,43 @@
+<div class="container-fluid" style="padding-bottom:110px; margin-top:10px">
+    <div class="row">
+        <div class="col">
+            <h2 class="morad mb-0">Compañias <span class="text-muted" style="font-size: small;">({{collectionSize}})</span></h2>
+        </div>
+    </div>
+    <hr>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let country of countries">
+                <a class="card mb-3 p-0 bg-light lista shadow">
+                    <div div class="card-header">
+                        <img src="../../../assets/img/companies/logo2.jpg" style="width: 345px; height:auto" alt="logo2.jpg">
+                    </div>
+                    <div class="card-body pt-2">
+                        <div class="row">
+                            <div class="col card-body shadow" style="border-radius: 50%;">
+                                <img src="../../../assets/img/companies/logo1.png" alt="logo1.png">
+                            </div>
+                            <div class="col">
+                                <h1 class="product-title pt-2">Pandora</h1>
+                                <div class="row text-right mb-0">
+                                    <p>Somos una empresa dedicada a cumplir con los sueños de nuestros clientes. Nuestra pasion es la joyeria, a traves de la joyeria se pueden contar muchas historias, por eso en Pandora creamos historias para ti.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="justify-content p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+    </div>
+</div>

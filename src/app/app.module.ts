@@ -19,7 +19,10 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { ProductsComponent } from './pages/products/products.component';
+import { CompaniesComponent } from './pages/companies/companies.component';
+import { CompanyComponent } from './pages/company/company.component';
+import { ProductComponent } from './pages/product/product.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,11 @@ import { MaterialModule } from './material.module';
     AboutUsComponent,
     CategoriesComponent,
     WishListComponent,
-    ProfileUserComponent
+    ProfileUserComponent,
+    ProductsComponent,
+    CompaniesComponent,
+    CompanyComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,6 @@ import { MaterialModule } from './material.module';
     NgbModule,
     NgxPopper,
     BrowserAnimationsModule,
-    MaterialModule,
     ReactiveFormsModule,
     FormsModule
   ],
