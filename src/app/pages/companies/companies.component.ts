@@ -16,6 +16,7 @@ export class CompaniesComponent implements OnInit {
   companies2: Company[] = [];
 
   constructor(private CompanyService: CompanyService, private router: Router) {
+    //this.getComps()
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class CompaniesComponent implements OnInit {
   getComps(){
     this.CompanyService.getCompanies()
       .subscribe(data => {
-        //console.log('compañias: ',data.companies);
+        ////('compañias: ',data.companies);
         this.companies = data.companies;
         this.companies2 = data.companies;
         this.collectionSize = data.companies.length;

@@ -19,6 +19,17 @@ export class ShopKartComponent implements OnInit {
   products: any[] = [];
   products2: any[] = [];
 
+  productData:Product = {
+    idProduct: '',
+    name: '',
+    description: '',
+    price: 0,
+    img: '',
+    active: false,
+    amount: 0,
+    totalPrice: 0
+  }
+
   public order:Order = {
     _id: '',
     idBuyer: '',
@@ -38,7 +49,9 @@ export class ShopKartComponent implements OnInit {
     location: {}
   }
 
-  constructor(private router: Router, private modalService: NgbModal, private OrderService: OrderService) { }
+  constructor(private router: Router, private modalService: NgbModal, private OrderService: OrderService) {
+    //this.OrderService.redirectTo('categories/companies/company/shopping-cart');
+  }
 
   ngOnInit(): void {
     this.order = this.OrderService.orderDatos;
@@ -61,10 +74,48 @@ export class ShopKartComponent implements OnInit {
   }
 
   addToKart(id:string, contentSuccess:any){
-    console.log('agrego el producto: ', id);
+    this.goProduct(id, 'add');
     this.validKart=true;
     this.modalService.dismissAll();
     this.modalService.open(contentSuccess, { centered: true });
   }
 
+  goProduct(id:string, tipo:string){
+    for(let prod of this.products2){
+      if(prod.idProduct==id){
+        if(prod.active==true){
+          this.productData=prod;
+          switch(tipo){
+            case 'add':
+              //console.log("escogio add el producto: ", prod.idProduct);
+              this.OrderService.addProd(this.productData);
+              break
+            case 'subs':
+              //console.log("escogio subs el producto: ", prod.idProduct);
+              this.OrderService.subsProd(this.productData);
+              break
+            case 'del':
+              //console.log("escogio del el producto: ", prod.idProduct);
+              this.OrderService.delProd(this.productData);
+              break
+            default:
+              break
+          }
+        }
+      }
+    }
+    this.OrderService.redirectTo('categories/companies/company/shopping-cart');
+  }
+
+  addOne(id:string){
+    this.goProduct(id, 'add');
+  }
+
+  substractOne(id:string){
+    this.goProduct(id, 'subs');
+  }
+
+  deleteOne(id:string){
+    this.goProduct(id, 'del');
+  }
 }

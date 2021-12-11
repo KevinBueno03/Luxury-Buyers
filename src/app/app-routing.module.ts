@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { NavfooterbarComponent } from './components/navfooterbar/navfooterbar.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
       path: 'categories/companies/company/shopping-cart/ubicacion',
       component: UbicacionComponent
+  },
+  {
+      path: 'app',
+      component: NavfooterbarComponent,
   },
   {
       path: '**',

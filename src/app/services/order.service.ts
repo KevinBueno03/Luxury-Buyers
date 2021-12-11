@@ -19,12 +19,14 @@ export class OrderService {
   private _orderActual: string='';
 
   public productDatos: Product={
-    _id: '',
+    idProduct: '',
     name: '',
     description: '',
     img: '',
     active: true,
-    price: 0
+    price: 0,
+    amount: 0,
+    totalPrice: 0
   }
 
   public order: Order={
@@ -105,8 +107,8 @@ export class OrderService {
 
   getBuyer(){
     const token = window.localStorage.getItem('token')
-    this.http.post<Buyer>(`${this.apiBaseUrl}/buyers/buyer`,token )
-    .subscribe(data =>{
+    this.http.get<any>(`${this.apiBaseUrl}/buyers/buyer/${token}`)
+    .subscribe( data =>{
       this._buyerActual = data._id;
       this.buyerDatos = data;
       this.getOrderActBuyer();
@@ -118,17 +120,65 @@ export class OrderService {
       .subscribe(data =>{
         this.order=data;
         this._orderActual = data._id;
-        console.log('Order Actual: ', this.order)
+        //console.log('Order Actual: ', this._orderActual)
       })
   }
 
-  addProd(data:Product){
-    console.log('add prod: ', data);
-    this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-add`, data)
+  addProd(data:any){
+    console.log('add prod: ', data.idProduct);
+    this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-add`,
+    {
+      product:{
+          idProduct: data.idProduct,
+          name: data.name,
+          description: data.description,
+          img: data.img,
+          active: data.active,
+          price: data.price,
+          amount: 1,
+          totalPrice: data.totalPrice,
+    }})
       .subscribe(data =>{
         this.getOrderActBuyer()
       })
+  }
 
+  subsProd(data:any){
+    console.log('subs prod: ', data.idProduct);
+    this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-subtract`,
+    {
+      product:{
+          idProduct: data.idProduct,
+          name: data.name,
+          description: data.description,
+          img: data.img,
+          active: data.active,
+          price: data.price,
+          amount: 1,
+          totalPrice: data.totalPrice
+    }})
+      .subscribe(data =>{
+        this.getOrderActBuyer()
+      })
+  }
+
+  delProd(data:any){
+    console.log('del prod: ', data.idProduct);
+    this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-remove`,
+    {
+      product:{
+          idProduct:  data._id | data.idProducts,
+          name: data.name,
+          description: data.description,
+          img: data.img,
+          active: data.active,
+          price: data.price,
+          amount: 1,
+          totalPrice: data.totalPrice
+    }})
+      .subscribe(data =>{
+        this.getOrderActBuyer()
+      })
   }
 
   redirectTo(uri:string){

@@ -38,8 +38,8 @@ export class LoginComponent {
     this.BuyerService.login(email,password).subscribe(res =>{
       if(res){
         console.log("entro")
-        //this.router.navigateByUrl('/admin/orders');
         this.OrderService.getBuyer();
+        //this.router.navigateByUrl('app');
         window.location.reload();
       }else {
         alert("datos invalidos");

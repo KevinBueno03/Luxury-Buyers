@@ -1,7 +1,7 @@
 <div style="margin-top: 70px">
     <div class="" style="text-align: center; vertical-align: middle">
         <div class="login-content">
-            <form [formGroup]="registerForm" (ngSubmit)="guardarBuyer()">
+            <form (submit)="registerForm" [formGroup]="registerForm">
                 <div class="morad pt-4">
                     <h1>Registrate</h1>
                     <h4>¡Claro que tienes estilo...!</h4>
@@ -11,7 +11,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="form-control" minlength="5" id="name" placeholder="Nombre Completo" formControlName="name" [ngClass]="{'is-invalid':registerUsuario['email'].errors}">
+                        <input type="text" class="form-control" minlength="5" id="name" placeholder="Nombre Completo" formControlName="name" [ngClass]="{'is-invalid':registerUsuario['name'].errors}">
                         <div class="my-3" style="color:red" *ngIf="registerUsuario['name'].errors">
                             <div *ngIf="registerUsuario['name'].errors['required']">
                                 Nombre no puede estar vacio
@@ -62,18 +62,18 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <input type="password" class="form-control" id="confPass" formControlName="confPass" placeholder="Confirme su Contraseña" [ngClass]="{'is-invalid':registerUsuario['password'].errors}">
-                        <div class="my-3" style="color:red" *ngIf="registerUsuario['password'].errors">
-                            <div *ngIf="registerUsuario['password'].errors['required']">
+                        <input type="password" class="form-control" id="confPass" formControlName="confPass" placeholder="Confirme su Contraseña" [ngClass]="{'is-invalid':registerUsuario['confPass'].errors}">
+                        <div class="my-3" style="color:red" *ngIf="registerUsuario['confPass'].errors">
+                            <div *ngIf="registerUsuario['confPass'].errors['required']">
                                 Password no puede estar vacío
                             </div>
-                            <div *ngIf="registerUsuario['password'].errors['MustMatch']">
+                            <div *ngIf="registerUsuario['confPass'].errors['MustMatch']">
                                 Las contraseñas deben coincidir
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="pb-3">¿Olvidaste tu contraseña?</a>
+                <a class="pb-5">¿Olvidaste tu contraseña?</a>
                 <button type="submit" [disabled]=registerForm.invalid class="btn btn-lux" (click)="guardarBuyer()">Registrarme</button>
                 <a class="morad mt-5" routerLink='/login' style="margin-top: 10px;">Ya tienes una cuenta? <span style="color: black; font-weight: bold">Iniciar Sesion
                 <i class="fas fa-arrow-right"></i></span> </a>

@@ -54,15 +54,20 @@ export class CompanyService {
     this.companies=value;
   }
 
+  set catActual(value:string){
+    this._categoryActual=value;
+  }
+
   set compDatos(value:Company){
     this.companyDatos=value;
   }
 
   constructor(private http: HttpClient, private CategoryService: CategoryService) {
-    this._categoryActual=this.CategoryService.catActual;
+    //this._categoryActual=this.CategoryService.catActual;
   }
 
   getCompanies(): Observable<any>{
+    //console.log('catActSer: ', this._categoryActual)
     return this.http.get<any>(`${this.apiBaseUrl}/category/${this._categoryActual}/companies`)
   }
 

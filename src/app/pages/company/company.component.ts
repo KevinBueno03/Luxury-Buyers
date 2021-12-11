@@ -34,12 +34,14 @@ export class CompanyComponent implements OnInit {
   }
 
   public productData: Product = {
-    _id: '',
+    idProduct: '',
     name: '',
     description: '',
     price: 0,
     img: '',
-    active: false
+    active: false,
+    amount: 0,
+    totalPrice: 0
   }
 
   public order:Order = {
@@ -61,7 +63,8 @@ export class CompanyComponent implements OnInit {
     location: {}
   }
 
-  constructor(private CompanyService: CompanyService, private router: Router, private modalService: NgbModal, private OrderService: OrderService) { }
+  constructor(private CompanyService: CompanyService, private router: Router, private modalService: NgbModal, private OrderService: OrderService) {
+  }
 
   ngOnInit(): void {
     this.CompanyService.getCompany()
@@ -70,7 +73,10 @@ export class CompanyComponent implements OnInit {
         this.data = resp;
         this.obtComp(resp);
         this.order=this.OrderService.orderDatos;
-        this.orderSize = this.order.products.length;
+        for(let i=0; i<this.order.products.length; i++){
+          const prod:Product = this.order.products[i];
+          this.orderSize += prod.amount;
+        }
         if(this.orderSize>0){
           this.validKart=true;
         }
@@ -84,11 +90,21 @@ export class CompanyComponent implements OnInit {
   }
 
   goProduct(id:any, content:any){
-    //console.log("escogio el producto: ", id);
     for(let prod of this.products2){
-      if(prod._id==id){
+      if(prod.idProduct==id){
         if(prod.active==true){
           this.productData=prod;
+        }else{
+          this.productData = {
+            idProduct: '',
+            name: '',
+            description: '',
+            price: 0,
+            img: '',
+            active: false,
+            amount: 0,
+            totalPrice: 0
+          }
         }
       }
     }
@@ -96,20 +112,34 @@ export class CompanyComponent implements OnInit {
   }
 
   obtComp(resp:any){
+    let prods:Product[] = [];
     for(let i=0; i<resp.length; i++){
       if(resp[i].companies._id==this.CompanyService.compActual){
+        for(let prod of resp[i].companies.products){
+          let js= {
+            idProduct: prod._id,
+            name: prod.name,
+            description: prod.description,
+            price: prod.price,
+            img: prod.img,
+            active: prod.active,
+            amount: prod.amount,
+            totalPrice: prod.totalPrice
+          }
+          prods.push(js);
+        }
         this.companyDatos=resp[i].companies;
-        //console.log('company--products: ',this.companyDatos.products)
-        this.products = this.companyDatos.products;
-        this.products2 = this.companyDatos.products;
-        this.collectionSize = this.companyDatos.products.length;
+        //console.log('company--products: ',prods)
+        this.products = prods;
+        this.products2 = prods;
+        this.collectionSize = prods.length;
         this.refreshProducts()
       }
     }
   }
 
   addToKart(id:string, contentSuccess:any){
-    console.log('agrego el producto: ', id);
+    //console.log('agrego el producto: ', this.productData);
     this.OrderService.addProd(this.productData);
     this.validKart=true;
     this.modalService.dismissAll();

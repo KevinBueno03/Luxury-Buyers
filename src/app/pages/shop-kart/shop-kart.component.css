@@ -1,0 +1,9 @@
+.cuadroButton {
+    font-size: 21px;
+    outline: 1px solid;
+    max-width: fit-content;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    align-self: center;
+    max-width: fit-content;
+}

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Buyer } from 'src/app/interfaces/buyer.interface';
-import { validationsForm } from 'src/app/utils/formValidations';
 import { BuyerService } from '../../services/buyer.service';
 
 @Component({
@@ -15,14 +14,15 @@ export class RegisterComponent {
   registerForm : FormGroup;
 
   constructor(private BuyerService:BuyerService, private _Router: Router, private fB:FormBuilder) {
-      this.registerForm =this.fB.group({
-      name: new FormControl ('',Validators.required),
-      email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl ('',[Validators.required, Validators.minLength(8)]),
-      confPass: new FormControl('',[Validators.required]),
-    },{
-      Validators: this.MustMatch('password', 'confPass')
-    }
+      this.registerForm=this.fB.group({
+        name: new FormControl ('',Validators.required),
+        email: new FormControl('',[Validators.required,Validators.email]),
+        password: new FormControl ('',[Validators.required, Validators.minLength(8)]),
+        confPass: new FormControl('',[Validators.required]),
+      },
+      {
+        Validators: this.MustMatch('password', 'confPass')
+      }
     );
   }
 
@@ -31,6 +31,7 @@ export class RegisterComponent {
   }
 
   MustMatch(passA:string, passB:string) {
+    console.log('no')
     return(formGroup:FormGroup)=>{
       const controlA = formGroup.controls[passA];
       const controlB = formGroup.controls[passB];
@@ -46,16 +47,30 @@ export class RegisterComponent {
   onSubmit(){
     this.submited=true;
     if(!this.registerForm.valid){
-      console.log('invalido')
       return;
     }
   }
 
   guardarBuyer(){
     const {name, email,password } = this.registerForm.value;
-
     if(this.submited){
       console.log('registrar comprador con datos:', {_id:'', name, email, password, img:''});
+    }else {
+      alert("datos invalidos");
     }
   }
+  /*
+  login(){
+    const {email,password} = this.loginForm.value;
+    this.BuyerService.login(email,password).subscribe(res =>{
+      if(res){
+        console.log("entro")
+        //this.router.navigateByUrl('/admin/orders');
+        this.OrderService.getBuyer();
+        window.location.reload();
+      }else {
+        alert("datos invalidos");
+      }
+    })
+  } */
 }

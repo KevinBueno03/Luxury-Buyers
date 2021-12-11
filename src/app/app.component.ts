@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OrderService } from './services/order.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bikers';
+
   lS: string | null = localStorage.getItem('token');
   onBuyerLogged = false;
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+  constructor(private OrderService: OrderService){}
+
+  ngOnInit() {
     if(this.lS !== null){
       this.onBuyerLogged = true;
+      this.OrderService.getBuyer();
     }else{
       this.onBuyerLogged = false;
     }
