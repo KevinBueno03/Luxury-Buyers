@@ -1,1 +1,104 @@
-<p>company works!</p>
+<div *ngIf="!companyDatos; else divProducts">
+</div>
+
+<ng-template #divProducts>
+    <div class="container-fluid" style="padding-bottom:110px; margin-top:10px">
+        <div class="row">
+            <div class="col-8" style="text-align:left; align-self: center;">
+                <a routerLink="/categories/companies" class="morad"><i class="fas fa-long-arrow-alt-left fa-2x"></i><span class="mb-0 px-1" style="font-size: x-large; align-self: center;">Empresas</span></a>
+            </div>
+            <div class="col-4" style="text-align:right; align-self: center;">
+                <button class="btn" [disabled]="!validKart" [ngClass]="{'btn-gris':validKart==false ,'btn-lux':validKart==true}" routerLink="/categories/companies/company/shopping-cart"><i class="fas fa-cart-plus fa-2x"><span class="text-muted dorad" *ngIf="orderSize>0" style="font-size: normals;">{{orderSize}}</span></i></button>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="text-align-last: center;">
+            <h2 class="morad">{{companyDatos.name}}</h2>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let prod of products">
+                    <a class="card mb-3 p-0 bg-light lista shadow" style="border-radius: 15px;" (click)="goProduct(prod._id, content)">
+                        <div class="card-body pt-2">
+                            <div div class="pt-3">
+                                <img src="{{prod.img}}" style="width: 345px; height:auto" alt="{{prod.img}}">
+                            </div>
+                            <div class="row px-3">
+                                <div class="row" style=" text-align-last:center">
+                                    <h2 class="product-title morad">{{prod.name}}<span *ngIf="prod.active==false" style="font-weight: 12px;color:red"> Sin existencias</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div class="justify-content p-2">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProducts()">
+            </ngb-pagination>
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProducts()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+        </select>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-body p-3" *ngIf="productData.active==true">
+        <div class="card-body p-0">
+            <div class="p-0 m-0" style="background-image: url({{productData.img}});width: 365px; height:345px;background-position: center;">
+                <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span style="font-size: 60px" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="row m-0 p-0">
+                    <div class="col-8">
+                        <h2 class="product-title morad">{{productData.name}}</h2>
+                        <h2 class="morad">{{productData.description}}</h2>
+                        <h2 class="morad">HNL {{productData.price}}</h2>
+                    </div>
+                    <div class="col-4" style="text-align:right; align-self: center;">
+                        <button class="btn btn-lux" (click)="addToKart(productData._id, contentSuccess)"><i class="fas fa-cart-plus fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body p-3" *ngIf="productData.active==false">
+        <div class="card-body p-0">
+            <div class="modal-header">
+                <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span style="font-size: 30px" aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3" style="text-align: center">
+                    <h2>El producto se encuentra agotado, ¡Pronto tendremos más en existencia!</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lux" (click)="modal.dismiss('Cross click')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #contentSuccess let-modal style="border-radius: 25px;">
+    <div class="modal-header">
+        <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span style="font-size: 30px" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body alert-success">
+        <div class="p-3" style="text-align: center">
+            <h2>¡Producto agregado con exito!</h2>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-lux" (click)="closeAndRecharge()">Cerrar</button>
+    </div>
+</ng-template>

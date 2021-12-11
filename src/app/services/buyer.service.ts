@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponse, Buyer } from '../interfaces/buyer.interface';
+import { AuthResponse, Buyer, LoginResponse } from '../interfaces/buyer.interface';
 import { environment } from '../../environments/environment'
 import { catchError, map, of, tap } from 'rxjs';
 @Injectable({
@@ -11,13 +11,15 @@ export class BuyerService {
   private apiBaseUrl: string = environment.baseUrl;
   private _buyerActual = '';
 
-  public datosBuyer: Buyer =
-    {
-      _id: '',
-      name: '',
-      email: '',
-      password: ''
-    };
+  public datosBuyer: Buyer ={
+    _id: '',
+    name: '',
+    email: '',
+    password: '',
+    active: true,
+    img: '',
+    token: ''
+  };
 
   constructor(private http:HttpClient){}
 
@@ -33,15 +35,15 @@ export class BuyerService {
     this._buyerActual = value;
   }
 
-  login ( email: string, password: string){
+  login( email: string, password: string){
     const url = `${this.apiBaseUrl}/login?type=buyer`;
     const body = { email, password };
 
-    return this.http.post<AuthResponse>( url, body )
+    return this.http.post<LoginResponse>( url, body )
       .pipe(
         tap(resp => {
-          if(resp.session_code){
-            localStorage.setItem('token', resp.session_code!);
+          if(resp.token){
+            localStorage.setItem('token', resp.token!);
           }
         }),
         map(resp => true),
@@ -55,15 +57,6 @@ export class BuyerService {
     .set('x-access-token', localStorage.getItem('token') || '');
 
     return this.http.get<AuthResponse>( url, {headers} )
-      .pipe(
-        map(resp => {
-          if(resp.session_code){
-            localStorage.setItem('token', resp.session_code!);
-          }
-          return true
-        }),
-        catchError(err => of(false))
-      )
   }
 
   guardarNuevoBuyer(buyer:Buyer) {
@@ -73,4 +66,9 @@ export class BuyerService {
 
     return this.http.post<AuthResponse>( url, body )
   }
+
+  logout(){
+    localStorage.clear();
+  }
 }
+

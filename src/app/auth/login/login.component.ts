@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/order.service';
 import { BuyerService } from '../../services/buyer.service';
 
 @Component({
@@ -8,20 +10,40 @@ import { BuyerService } from '../../services/buyer.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  validacion = false;
-  @Input() buyerLogin= {
-    email: '',
-    password: ''
-  };
+  submited : boolean = false;
+  loginForm : FormGroup;
 
-  constructor(private BuyerService:BuyerService, private router: Router) { }
+  ngOnInit():void {}
 
-  iniciarSesion(){
-    console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
-    this.BuyerService.login(this.buyerLogin.email, this.buyerLogin.password)
-    .subscribe( resp =>{
-      console.log(resp);
-      window.location.reload();
+  constructor(private BuyerService:BuyerService, private router: Router,private formBuilder:FormBuilder, private OrderService:OrderService) {
+    this.loginForm =this.formBuilder.group({
+      email: new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl ('',[Validators.required, Validators.minLength(8)])
+    });
+  }
+
+  get loginUsuario () {
+    return this.loginForm.controls;
+  }
+
+  onSubmit(){
+    this.submited=true;
+    if(!this.loginForm.valid){
+      return;
+    }
+  }
+
+  login(){
+    const {email,password} = this.loginForm.value;
+    this.BuyerService.login(email,password).subscribe(res =>{
+      if(res){
+        console.log("entro")
+        //this.router.navigateByUrl('/admin/orders');
+        this.OrderService.getBuyer();
+        window.location.reload();
+      }else {
+        alert("datos invalidos");
+      }
     })
   }
 

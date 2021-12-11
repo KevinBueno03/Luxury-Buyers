@@ -5,5 +5,6 @@ export interface Company{
   calification: number;
   products: [];
   img: string;
+  logo: string;
   active: boolean;
 }

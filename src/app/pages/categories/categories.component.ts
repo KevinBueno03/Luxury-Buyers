@@ -21,7 +21,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.CategoryService.getCatgs()
       .subscribe( resp => {
-        console.log('resp: ',resp);
+        //console.log('resp: ',resp);
         this.categories = resp;
         this.categories2 = resp;
         this.collectionSize = this.categories2.length;
@@ -36,10 +36,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   goCategory(id:any){
-    console.log("escogio la categoria: ", id);
+    //console.log("escogio la categoria: ", id);
     this.CategoryService.catActual=id;
-    this.CategoryService.getComs();
-    this.router.navigate(['/companies']);
+    this.router.navigate(['categories/companies']);
   }
 }
 

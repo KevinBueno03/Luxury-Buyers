@@ -9,9 +9,9 @@ import { CompaniesComponent } from './pages/companies/companies.component';
 import { CompanyComponent } from './pages/company/company.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { OrdersComponent } from './pages/orders/orders.component';
-import { ProductComponent } from './pages/product/product.component';
-import { ProductsComponent } from './pages/products/products.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
+import { ShopKartComponent } from './pages/shop-kart/shop-kart.component';
+import { UbicacionComponent } from './pages/ubicacion/ubicacion.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 const routes: Routes = [
@@ -48,20 +48,20 @@ const routes: Routes = [
       component: OrdersComponent
   },
   {
-      path: 'companies',
+      path: 'categories/companies',
       component: CompaniesComponent
   },
   {
-      path: 'company',
+      path: 'categories/companies/company',
       component: CompanyComponent
   },
   {
-      path: 'product',
-      component: ProductComponent
+      path: 'categories/companies/company/shopping-cart',
+      component: ShopKartComponent
   },
   {
-      path: 'Products',
-      component: ProductsComponent
+      path: 'categories/companies/company/shopping-cart/ubicacion',
+      component: UbicacionComponent
   },
   {
       path: '**',

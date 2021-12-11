@@ -12,6 +12,23 @@ export class CompanyService {
   private apiBaseUrl: string = environment.baseUrl;
   private _companyActual = '';
   private companies: Company[] = [];
+  private _categoryActual: string='';
+  private companiesCat = [];
+
+  public companyDatos: Company={
+    _id: '',
+    name: '',
+    description: '',
+    calification: 0,
+    products: [],
+    img: '',
+    active: true,
+    logo: ''
+  }
+
+  get compDatos(){
+    return this.companyDatos;
+  }
 
   get compActual(){
     return this._companyActual;
@@ -19,6 +36,14 @@ export class CompanyService {
 
   get comps(){
     return this.companies;
+  }
+
+  get compsCat(){
+    return this.companiesCat
+  }
+
+  set compsCat(value: any){
+    this.companiesCat = value;
   }
 
   set compActual(value:string){
@@ -29,25 +54,20 @@ export class CompanyService {
     this.companies=value;
   }
 
-  public companyDatos: Company={
-    _id: '',
-    name: '',
-    description: '',
-    calification: 0,
-    products: [],
-    img: '',
-    active: false
+  set compDatos(value:Company){
+    this.companyDatos=value;
   }
 
   constructor(private http: HttpClient, private CategoryService: CategoryService) {
+    this._categoryActual=this.CategoryService.catActual;
   }
 
-  getComps(){
-    this.companies = this.CategoryService.compsCatAct;
+  getCompanies(): Observable<any>{
+    return this.http.get<any>(`${this.apiBaseUrl}/category/${this._categoryActual}/companies`)
   }
 
-
-  getCompany(id:any){
-    this._companyActual=id;
+  getCompany(){
+    return this.http.get<any>(`${this.apiBaseUrl}/category/${this._categoryActual}/companies-products`)
   }
+
 }

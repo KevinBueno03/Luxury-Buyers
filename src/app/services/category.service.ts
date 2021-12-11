@@ -44,12 +44,4 @@ export class CategoryService {
   getCatgs(): Observable<Category[]>{
     return this.http.get<any>(`${this.apiBaseUrl}/categories`);
   }
-
-  getComs(){
-    this.http.get<any>(`${this.apiBaseUrl}/category/${this._categoryActual}/companies`)
-      .subscribe(data => {
-        console.log('compañias: ', data.companies);
-        this.companiesCatActual = data.companies;
-      })
-  }
 }

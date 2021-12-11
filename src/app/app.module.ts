@@ -19,10 +19,10 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductsComponent } from './pages/products/products.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { CompanyComponent } from './pages/company/company.component';
-import { ProductComponent } from './pages/product/product.component';
+import { ShopKartComponent } from './pages/shop-kart/shop-kart.component';
+import { UbicacionComponent } from './pages/ubicacion/ubicacion.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +37,10 @@ import { ProductComponent } from './pages/product/product.component';
     CategoriesComponent,
     WishListComponent,
     ProfileUserComponent,
-    ProductsComponent,
     CompaniesComponent,
     CompanyComponent,
-    ProductComponent
+    ShopKartComponent,
+    UbicacionComponent
   ],
   imports: [
     BrowserModule,

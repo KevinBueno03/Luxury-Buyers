@@ -1,7 +1,7 @@
 <div style="margin-top: 70px">
     <div class="" style="text-align: center; vertical-align: middle">
         <div class="login-content">
-            <form (ngSubmit)="guardarBuyer()">
+            <form [formGroup]="registerForm" (ngSubmit)="guardarBuyer()">
                 <div class="morad pt-4">
                     <h1>Registrate</h1>
                     <h4>¡Claro que tienes estilo...!</h4>
@@ -11,7 +11,15 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
-                        <input class="" type="text" placeholder="Nombre Completo" name="name" [(ngModel)]="buyerRegistro.name">
+                        <input type="text" class="form-control" minlength="5" id="name" placeholder="Nombre Completo" formControlName="name" [ngClass]="{'is-invalid':registerUsuario['email'].errors}">
+                        <div class="my-3" style="color:red" *ngIf="registerUsuario['name'].errors">
+                            <div *ngIf="registerUsuario['name'].errors['required']">
+                                Nombre no puede estar vacio
+                            </div>
+                            <div *ngIf="registerUsuario['name'].errors['minlenght']">
+                                Longitud de nombre insuficiente
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -20,8 +28,15 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="div">
-                        <input type="text" placeholder="Correo Electronico" name="email" [(ngModel)]="buyerRegistro.email" pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
-                            required>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid':registerUsuario['email'].errors}">
+                        <div class="my-3" style="color:red" *ngIf="registerUsuario['email'].errors">
+                            <div *ngIf="registerUsuario['email'].errors['required']">
+                                Email no puede estar vacio
+                            </div>
+                            <div *ngIf="registerUsuario['email'].errors['email']">
+                                Escriba un correo válido
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -30,7 +45,15 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <input class="" type="password" placeholder="Contraseña" name="password" [(ngModel)]="buyerRegistro.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Contraseña" [ngClass]="{'is-invalid':registerUsuario['password'].errors}">
+                        <div class="my-3" style="color:red" *ngIf="registerUsuario['password'].errors">
+                            <div *ngIf="registerUsuario['password'].errors['required']">
+                                Password no puede estar vacío
+                            </div>
+                            <div *ngIf="registerUsuario['password'].errors['minlength']">
+                                La contraseña debe de tener 8 carecteres o más
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -39,20 +62,19 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <input class="" type="password" placeholder="Confirme su Contraseña" name="confPass" [(ngModel)]="confPass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        <input type="password" class="form-control" id="confPass" formControlName="confPass" placeholder="Confirme su Contraseña" [ngClass]="{'is-invalid':registerUsuario['password'].errors}">
+                        <div class="my-3" style="color:red" *ngIf="registerUsuario['password'].errors">
+                            <div *ngIf="registerUsuario['password'].errors['required']">
+                                Password no puede estar vacío
+                            </div>
+                            <div *ngIf="registerUsuario['password'].errors['MustMatch']">
+                                Las contraseñas deben coincidir
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="validacionCorreo">
-                    Correo incorrecto, ingrese un correo valido
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="validacionContrasena">
-                    Las contraseñas no coinciden
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="status">
-                    Existen campos vacios, debe de rellenar todos campos solicitados.
                 </div>
                 <a class="pb-3">¿Olvidaste tu contraseña?</a>
-                <button class="btn-lux-enabled" style type="button" (click)="guardarBuyer()">Registrarme</button>
+                <button type="submit" [disabled]=registerForm.invalid class="btn btn-lux" (click)="guardarBuyer()">Registrarme</button>
                 <a class="morad mt-5" routerLink='/login' style="margin-top: 10px;">Ya tienes una cuenta? <span style="color: black; font-weight: bold">Iniciar Sesion
                 <i class="fas fa-arrow-right"></i></span> </a>
             </form>

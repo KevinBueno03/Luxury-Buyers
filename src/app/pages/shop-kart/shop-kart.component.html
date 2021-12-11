@@ -1,0 +1,115 @@
+<div *ngIf="!order; else divCompanies">
+</div>
+
+<ng-template #divCompanies>
+    <div class="container-fluid" style="padding-bottom:110px; margin-top:10px">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <a routerLink="/categories/companies/company" class="morad"><i class="fas fa-long-arrow-alt-left fa-2x"></i><span class="mb-0 px-1" style="font-size: x-large; align-self: center;"> Company</span></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="text-align-last: center;">
+            <h2 class="morad">Carrito de Compras<span class="text-muted" style="font-size: small;">({{kartSize}}) Elementos</span></h2>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let prod of products">
+                    <div class="card mb-3 p-0 bg-light lista shadow">
+                        <div class="card-body">
+                            <div class="row px-2">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:left;">
+                                        <h3>Detalle Producto</h3>
+                                    </div>
+                                    <div class="col-3" style="text-align:left;">
+                                        <h3>Cantidad</h3>
+                                    </div>
+                                    <div class="col-3" style="text-align:left;">
+                                        <h3>Total Precio</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6" style="text-align:left; align-items: flex-start;">
+                                        <h3>{{prod.name}}</h3>
+                                        <h3>{{prod.description}}</h3>
+                                    </div>
+                                    <div class="col-3" style="text-align:left; align-items: flex-start;">
+                                        <div class="row">
+                                            <div class="col">
+                                                <i class="fas fa-plus-square morad"></i>
+                                            </div>
+                                            <div class="col">
+                                                <i class="far fa-square morad">2</i>
+                                            </div>
+                                            <div class="col">
+                                                <i class="fas fa-minus-square morad"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3" style="text-align:left; align-items: flex-start;">
+                                        <h3>HNL {{prod.totalPrice}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div class="justify-content p-2">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshProducts()">
+            </ngb-pagination>
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProducts()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+        </select>
+        </div>
+        <div class="card-body shadow" style="border-radius: 15px;">
+            <div class="row">
+                <div class="col-8">
+                    <h2 style="font-weight: bold;">Cantidad Artículos</h2>
+                </div>
+                <div class="col-4">
+                    <h2>{{order.amountProducts}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h2 style="font-weight: bold;">Subtotal</h2>
+                </div>
+                <div class="col-4">
+                    <h2>{{order.subtotal}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h2 style="font-weight: bold;">ISV</h2>
+                </div>
+                <div class="col-4">
+                    <h2>{{order.isv}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h2 style="font-weight: bold;">Comisión de envío</h2>
+                </div>
+                <div class="col-4">
+                    <h2>{{order.commission}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h2 style="font-weight: bold;">Monto total</h2>
+                </div>
+                <div class="col-4">
+                    <h2>{{order.total}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

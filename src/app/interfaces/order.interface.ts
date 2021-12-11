@@ -1,5 +1,5 @@
 export interface Order{
-  _id: number;
+  _id: string;
   idBuyer: string;
   idBiker: string;
   products: [];
