@@ -144,7 +144,7 @@ export class OrderService {
           active: data.active,
           price: data.price,
           amount: 1,
-          totalPrice: data.totalPrice,
+          totalPrice: data.price,
     }})
       .subscribe(data =>{
         this.getOrderActBuyer()

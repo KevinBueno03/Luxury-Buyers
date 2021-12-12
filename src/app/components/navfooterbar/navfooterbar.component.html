@@ -23,7 +23,7 @@
             </li>
             <li class="nav-item" (ngModel)="perfil" style="margin-right: 29%" (click)="cambiarActiveIcon(2)" routerLink="profile-user">
                 <div class="text-center" [ngClass]="{'morad': perfil==true, 'grisaceo': perfil==false}">
-                    <img class="py-0 img-bar" style="background: url({{urlImgUser}})">
+                    <img class="py-0 img-bar" style="background: url({{urlImgUser}}); background-size: cover;">
                     <div class="py-0">
                         <span>Perfil</span>
                     </div>
