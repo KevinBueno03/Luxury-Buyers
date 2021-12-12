@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/interfaces/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-categories',

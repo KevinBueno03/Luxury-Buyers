@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponse, Buyer, LoginResponse } from '../interfaces/buyer.interface';
 import { environment } from '../../environments/environment'
-import { catchError, map, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,12 +27,16 @@ export class BuyerService {
     return this.datosBuyer;
   }
 
-  public get buyerActual() {
+  get buyerActual() {
     return this._buyerActual;
   }
 
-  public set buyerActual(value) {
+  set buyerActual(value) {
     this._buyerActual = value;
+  }
+
+  set buyer(value) {
+    this.datosBuyer=value;
   }
 
   login( email: string, password: string){
@@ -59,12 +63,16 @@ export class BuyerService {
     return this.http.get<AuthResponse>( url, {headers} )
   }
 
-  guardarNuevoBuyer(buyer:Buyer) {
-    //console.log('guardar desde el service');
+  guardarNuevoBuyer(body:any) {
+    console.log(body);
     const url = `${this.apiBaseUrl}/register-buyer`;
-    const body = { buyer };
 
-    return this.http.post<AuthResponse>( url, body )
+    return this.http.post<any>( url, {name: body.name, email:body.email, password:body.password})
+  }
+
+  returnBuyer(): Observable<any>{
+    const token = window.localStorage.getItem('token')
+    return this.http.get<any>(`${this.apiBaseUrl}/buyers/buyer/${token}`)
   }
 
   logout(){

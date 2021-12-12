@@ -7,4 +7,5 @@ export interface Company{
   img: string;
   logo: string;
   active: boolean;
+  address: string;
 }

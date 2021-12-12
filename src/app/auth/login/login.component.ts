@@ -37,7 +37,6 @@ export class LoginComponent {
     const {email,password} = this.loginForm.value;
     this.BuyerService.login(email,password).subscribe(res =>{
       if(res){
-        console.log("entro")
         this.OrderService.getBuyer();
         //this.router.navigateByUrl('app');
         window.location.reload();

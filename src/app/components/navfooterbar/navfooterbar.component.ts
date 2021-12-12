@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BuyerService } from 'src/app/services/buyer.service';
 
 @Component({
   selector: 'app-navfooterbar',
@@ -7,18 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./navfooterbar.component.css']
 })
 export class NavfooterbarComponent {
-  nombVars = [{"var": true}, {"var": false}, {"var": false}, {"var": false}];
-  paginas = [{"page": 'categories'}, {"page": 'orders'}, {"page": 'wish-list'}, {"page": 'profile-user'}];
+  urlImgUser = '';
+  nombVars = [{"var": true}, {"var": false}, {"var": false}];
+  paginas = [{"page": 'categories'}, {"page": 'orders'}, {"page": 'profile-user'}];
 
   categorias = this.nombVars[0]['var'];
   ordenes = this.nombVars[1]['var'];
-  deseos = this.nombVars[2]['var'];
-  perfil = this.nombVars[3]['var'];
+  perfil = this.nombVars[2]['var'];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private modalService:NgbModal, private BuyerService:BuyerService) { }
 
   ngOnInit(): void {
     this.router.navigate([`/categories`])
+    this.BuyerService.returnBuyer()
+    .subscribe( data =>{
+      //console.log(data);
+      this.urlImgUser = data.img;
+      console.log('url: ', this.urlImgUser)
+    })
   }
 
   cambiarActiveIcon(ind:number) {
@@ -32,8 +40,17 @@ export class NavfooterbarComponent {
 
     this.categorias = this.nombVars[0]['var'];
     this.ordenes = this.nombVars[1]['var'];
-    this.deseos = this.nombVars[2]['var'];
-    this.perfil = this.nombVars[3]['var'];
-
+    this.perfil = this.nombVars[2]['var'];
   }
+
+  cerrarSesion(content:any) {
+    this.modalService.open(content, { centered: true })
+  }
+
+  closeAndRecharge(){
+    this.modalService.dismissAll();
+    this.BuyerService.logout();
+    window.location.reload();
+  }
+
 }

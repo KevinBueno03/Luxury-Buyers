@@ -50,7 +50,6 @@ export class ShopKartComponent implements OnInit {
   }
 
   constructor(private router: Router, private modalService: NgbModal, private OrderService: OrderService) {
-    //this.OrderService.redirectTo('categories/companies/company/shopping-cart');
   }
 
   ngOnInit(): void {
@@ -66,11 +65,6 @@ export class ShopKartComponent implements OnInit {
     this.products = this.products2
       .map((product, i) => ({id: i + 1, ...product}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
-
-  goUbication(){
-    //console.log("escogio el producto: ", id);
-
   }
 
   addToKart(id:string, contentSuccess:any){
@@ -104,7 +98,7 @@ export class ShopKartComponent implements OnInit {
         }
       }
     }
-    this.OrderService.redirectTo('categories/companies/company/shopping-cart');
+    this.refresh();
   }
 
   addOne(id:string){
@@ -117,5 +111,14 @@ export class ShopKartComponent implements OnInit {
 
   deleteOne(id:string){
     this.goProduct(id, 'del');
+  }
+
+  paid(){
+    console.log('paid');
+  }
+
+  refresh(){
+    console.log('refresh')
+    this.OrderService.redirectTo('categories/companies/company/shopping-cart');
   }
 }

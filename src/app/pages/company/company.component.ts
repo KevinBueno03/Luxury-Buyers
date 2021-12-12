@@ -30,7 +30,8 @@ export class CompanyComponent implements OnInit {
     products: [],
     img: '',
     active: true,
-    logo: ''
+    logo: '',
+    address: ''
   }
 
   public productData: Product = {
@@ -149,5 +150,9 @@ export class CompanyComponent implements OnInit {
   closeAndRecharge(){
     this.OrderService.redirectTo('categories/companies/company');
     this.modalService.dismissAll();
+  }
+
+  refresh(){
+    this.OrderService.redirectTo('categories/companies/company/shopping-cart');
   }
 }

@@ -40,7 +40,6 @@ li:hover {
 
 .img-bar {
     border-radius: 50%;
-    background-image: url('../../../assets/img/profiles/perfil.jfif');
     height: 30px;
     width: 30px;
     background-size: cover;

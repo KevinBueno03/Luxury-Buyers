@@ -26,7 +26,7 @@ export class CompaniesComponent implements OnInit {
   getComps(){
     this.CompanyService.getCompanies()
       .subscribe(data => {
-        ////('compañias: ',data.companies);
+        console.log('compañias: ',data.companies);
         this.companies = data.companies;
         this.companies2 = data.companies;
         this.collectionSize = data.companies.length;
@@ -43,6 +43,11 @@ export class CompaniesComponent implements OnInit {
   goCompany(id:any){
     //console.log("escogio la compañia: ", id);
     this.CompanyService.compActual=id;
+    for(let comp of this.companies2){
+      if(comp._id==id){
+        this.CompanyService.compDatos=comp;
+      }
+    }
     this.router.navigateByUrl('categories/companies/company');
   }
 }

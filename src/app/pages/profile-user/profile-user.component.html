@@ -1,28 +1,121 @@
 <div class="container mt-5">
     <div class="container" style="text-align: -webkit-center;">
         <div>
-            <div class="mb-3 p-0 bg-light lista shadow" style="background-image: url(../../../assets/img/profiles/perfil.jfif);">
+            <div class="mb-3 p-0 bg-light lista shadow" style="background-image: url({{datosBuyer.img}});">
             </div>
-            <div class="mb-3 px-0" style="text-align: start; max-width: 384px;">
-                <div class="py-0">
-                    <div class="">
-                        <div class="px-0">
-                            <h2 class="product-title">Nombre Completo</h2>
-                            <div style="margin-left: 5%;">
-                                <h2>Karen Bonilla</h2>
+            <div class="card mb-3 px-0" style="text-align: start; max-width: 384px;">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                        <a ngbNavLink>Ver Perfil</a>
+                        <ng-template ngbNavContent>
+                            <div class="p-3">
+                                <h2 class="product-title">Nombre Completo</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{datosBuyer.name}}</h2>
+                                </div>
+                                <h2 class="product-title">Correo Electronico</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{datosBuyer.email}}</h2>
+                                </div>
                             </div>
-                            <h2 class="product-title">Ordenes pendientes de entrega</h2>
-                            <div style="margin-left: 5%;">
-                                <h2>2</h2>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Más</a>
+                        <ng-template ngbNavContent>
+                            <div class="p-3">
+                                <h2 class="product-title">Monto total Comprado</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{montoTot}}</h2>
+                                </div>
+                                <h2 class="product-title">Numero total de productos comprados</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{totProds}}</h2>
+                                </div>
+                                <h2 class="product-title">Ordenes pendientes de entrega</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{pendientes}}</h2>
+                                </div>
+                                <h2 class="product-title">Ordenes Completadas</h2>
+                                <div style="margin-left: 5%;">
+                                    <h2>{{pagadas}}</h2>
+                                </div>
                             </div>
-                            <h2 class="product-title">Ordenes Completadas</h2>
-                            <div style="margin-left: 5%;">
-                                <h2>25</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Editar</a>
+                        <ng-template ngbNavContent>
+                            <form [formGroup]="registerForm" class="p-3">
+                                <div class="morad pt-4">
+                                    <h4>Completa los campos siguientes</h4>
+                                </div>
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="div">
+                                        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Contraseña" [ngClass]="{'is-invalid':registerUsuario['password'].errors}">
+                                        <div class="my-3" style="color:red" *ngIf="registerUsuario['password'].errors">
+                                            <div *ngIf="registerUsuario['password'].errors['required']">
+                                                Password no puede estar vacío
+                                            </div>
+                                            <div *ngIf="registerUsuario['password'].errors['minlength']">
+                                                La contraseña debe de tener 8 carecteres o más
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="div">
+                                        <input type="password" class="form-control" id="confPass" formControlName="confPass" placeholder="Confirme su Contraseña" [ngClass]="{'is-invalid':registerUsuario['confPass'].errors}">
+                                        <div class="my-3" style="color:red" *ngIf="registerUsuario['confPass'].errors">
+                                            <div *ngIf="registerUsuario['confPass'].errors['required']">
+                                                Password no puede estar vacío
+                                            </div>
+                                            <div *ngIf="registerUsuario['confPass'].errors['minlength']">
+                                                La contraseña debe de tener 8 carecteres o más
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" [disabled]=registerForm.invalid class="btn btn-lux" (click)="irActBuyer(contentSuccess)">Actualizar</button>
+                            </form>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav"></div>
             </div>
         </div>
     </div>
 </div>
+<div style="height: 55px;"></div>
+
+<ng-template #contentSuccess let-modal style="border-radius: 25px;">
+    <div class="modal-header">
+        <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span style="font-size: 30px" aria-hidden="true">&times;</span>
+  </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="row" style="align-self: center; align-content: center">
+                <div class="col"></div>
+                <div class="col" style="text-align-last: center"><i class="far fa-check-circle fa-4x morad"></i></div>
+                <div class="col"></div>
+
+            </div>
+
+            <div class="row p-3" style="text-align: center">
+                <h2>¡Actualización exitosa!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lux px-3" style="width: auto" (click)="closeAndRecharge()">Cerrar</button>
+    </div>
+</ng-template>

@@ -23,7 +23,8 @@ export class CompanyService {
     products: [],
     img: '',
     active: true,
-    logo: ''
+    logo: '',
+    address: ''
   }
 
   get compDatos(){

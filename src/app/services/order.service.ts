@@ -109,23 +109,31 @@ export class OrderService {
     const token = window.localStorage.getItem('token')
     this.http.get<any>(`${this.apiBaseUrl}/buyers/buyer/${token}`)
     .subscribe( data =>{
+      console.log(data);
       this._buyerActual = data._id;
       this.buyerDatos = data;
+      this.BuyerService.buyerActual = data._id;
+      this.BuyerService.buyer = data;
       this.getOrderActBuyer();
     })
   }
 
   getOrderActBuyer() {
-    this.http.get<Order>(`${this.apiBaseUrl}/orders/order/not-paid/buyer/${this._buyerActual}`)
+    this.http.get<any>(`${this.apiBaseUrl}/orders/order/not-paid/buyer/${this._buyerActual}`)
       .subscribe(data =>{
-        this.order=data;
-        this._orderActual = data._id;
-        //console.log('Order Actual: ', this._orderActual)
+        if (!data) {
+          console.log('si entro aki')
+          this.createNewOrderBuyer()
+        }else{
+          this.order=data;
+          this._orderActual = data._id;
+          //console.log('Order Actual: ', this.order)
+        }
       })
   }
 
   addProd(data:any){
-    console.log('add prod: ', data.idProduct);
+    //console.log('add prod: ', data);
     this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-add`,
     {
       product:{
@@ -144,7 +152,7 @@ export class OrderService {
   }
 
   subsProd(data:any){
-    console.log('subs prod: ', data.idProduct);
+    //console.log('subs prod: ', data);
     this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-subtract`,
     {
       product:{
@@ -163,11 +171,11 @@ export class OrderService {
   }
 
   delProd(data:any){
-    console.log('del prod: ', data.idProduct);
+    console.log('del prod: ', data);
     this.http.post<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}/product-remove`,
     {
       product:{
-          idProduct:  data._id | data.idProducts,
+          idProduct: data.idProducts,
           name: data.name,
           description: data.description,
           img: data.img,
@@ -177,13 +185,34 @@ export class OrderService {
           totalPrice: data.totalPrice
     }})
       .subscribe(data =>{
+        console.log('resRemove: ',data)
         this.getOrderActBuyer()
       })
   }
 
   redirectTo(uri:string){
-    this.router.navigateByUrl('/DummyComponent', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['/categories/companies/company']).then(()=>
     this.router.navigate([uri]));
   }
 
+  locationSet(body:any):Observable<any>{
+    return this.http.put<any>(`${this.apiBaseUrl}/orders/order/${this._orderActual}`,body, {observe:'body'})
+  }
+
+  createNewOrder():Observable<any>{
+    let buyerName= this.buyerDatos.name;
+    return this.http.post<any>(`${this.apiBaseUrl}/orders/order/buyer/${this._buyerActual}`,{buyerName: buyerName}, {observe:'body'})
+  }
+
+  obtOrders(): Observable<any>{
+    return this.http.get<any>(`${this.apiBaseUrl}/orders/buyer/${this._buyerActual}`);
+  }
+
+  createNewOrderBuyer(){
+    let buyerName= this.buyerDatos.name;
+    this.http.post<any>(`${this.apiBaseUrl}/orders/order/buyer/${this._buyerActual}`,{buyerName: buyerName}, {observe:'body'})
+      .subscribe(resp=>{
+        this.order=resp;
+      })
+  }
 }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand bg-gris fixed-bottom shadow">
     <div class="">
         <ul class="navbar-nav mt-2">
-            <li class="nav-item" (ngModel)="categorias" style="margin-right: 27%" (click)="cambiarActiveIcon(0)" routerLink="categories">
+            <li class="nav-item" (ngModel)="categorias" style="margin-right: 29%" (click)="cambiarActiveIcon(0)" routerLink="categories">
                 <div class="text-center" [ngClass]="{'morad': categorias==true, 'grisaceo': categorias==false}">
                     <div class="py-0">
                         <i class="fa fa-list-ul fa-2x"></i>
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="ordenes" style="margin-right: 27%" (click)="cambiarActiveIcon(1)" routerLink="orders">
+            <li class="nav-item" (ngModel)="ordenes" style="margin-right: 29%" (click)="cambiarActiveIcon(1)" routerLink="orders">
                 <div class="text-center" [ngClass]="{'morad': ordenes==true, 'grisaceo': ordenes==false}">
                     <div class="py-0">
                         <i class="fa fa-shipping-fast fa-2x"></i>
@@ -21,24 +21,51 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="deseos" style="margin-right: 27%" (click)="cambiarActiveIcon(2)" routerLink="wish-list">
-                <div class="text-center" [ngClass]="{'morad': deseos==true, 'grisaceo': deseos==false}">
+            <li class="nav-item" (ngModel)="perfil" style="margin-right: 29%" (click)="cambiarActiveIcon(2)" routerLink="profile-user">
+                <div class="text-center" [ngClass]="{'morad': perfil==true, 'grisaceo': perfil==false}">
+                    <img class="py-0 img-bar" style="background: url({{urlImgUser}})">
                     <div class="py-0">
-                        <i class="fa fa-heart fa-2x"></i>
-                    </div>
-                    <div class="py-0">
-                        <span>Deseos</span>
+                        <span>Perfil</span>
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="perfil" (click)="cambiarActiveIcon(3)" routerLink="profile-user">
-                <div class="text-center" [ngClass]="{'morad': perfil==true, 'grisaceo': perfil==false}">
-                    <img class="py-0 img-bar">
+            <li class="nav-item grisaceo" (click)="cerrarSesion(content)" style="margin-left: 15px">
+                <div class="text-center">
                     <div class="py-0">
-                        <span>Perfil</span>
+                        <i class="fas fa-sign-out-alt fa-2x"></i>
+                    </div>
+                    <div class="py-0">
+                        <span>Salir</span>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
+<ng-template #content let-modal style="border-radius: 25px;">
+    <div class="modal-header">
+        <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span style="font-size: 30px" aria-hidden="true">&times;</span>
+  </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="row" style="align-self: center; align-content: center">
+                <div class="col"></div>
+                <div class="col" style="text-align-last: center"><i class="far fa-question-circle fa-4x morad"></i>
+                </div>
+                <div class="col"></div>
+
+            </div>
+
+            <div class="row p-3" style="text-align: center">
+                <h2>¿Realmente deseas salir?</h2>
+                <h2>Se guardara tu orden actual para cuando vuelvas.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lux px-3" style="width: auto" (click)="closeAndRecharge()">Cerrar</button>
+    </div>
+</ng-template>

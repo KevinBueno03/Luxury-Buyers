@@ -1,1 +1,164 @@
-<p>ubicacion works!</p>
+<div>
+    <div class="" style="text-align: center; vertical-align: middle">
+        <div class="row">
+            <div class="row" style="text-align-last: left; padding-left: 25px;">
+                <a routerLink="/categories/companies/company/shopping-cart" class="morad p-3"><i class="fas fa-long-arrow-alt-left fa-2x"></i><span class="mb-0 px-1" style="font-size: x-large; align-self: center;">Carrito de Compras</span></a>
+                <hr>
+            </div>
+            <div class="login-content">
+                <form [formGroup]="ubicationForm">
+                    <div class="row">
+                        <div class="input-div one py-3">
+                            <div class="i">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="div">
+                                <input type="text" class="form-control" id="address" placeholder="address" formControlName="address" [ngClass]="{'is-invalid':ubicationOrder['address'].errors}">
+                                <div class="my-3" style="color:red" *ngIf="ubicationOrder['address'].errors">
+                                    <div *ngIf="ubicationOrder['address'].errors['required']">
+                                        Dirección no puede estar vacío
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-div pass pt-2 mb-5">
+                            <div class="i">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="div">
+                                <input type="number" class="form-control" id="telefono" formControlName="phone" placeholder="phone" [ngClass]="{'is-invalid':ubicationOrder['phone'].errors}">
+                                <div class="my-3" style="color:red" *ngIf="ubicationOrder['phone'].errors">
+                                    <div *ngIf="ubicationOrder['phone'].errors['required']">
+                                        Teléfono no puede estar vacío
+                                    </div>
+                                    <div *ngIf="ubicationOrder['phone'].errors['minlength']">
+                                        Teléfono debe de tener 8 dígitos exactamente
+                                    </div>
+                                    <div *ngIf="ubicationOrder['phone'].errors['maxlength']">
+                                        Teléfono debe de tener 8 dígitos exactamente
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="mapbox" fxLayoutAlign="center center" style="height: 200px; width: 320px; background-color: white">
+
+                    </div>
+
+                    <div class="row mb-3 p-3">
+                        <button type="submit" [disabled]=ubicationForm.invalid class="btn btn-lux" (click)="pagar(content)">Enviar a esta dirección</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h3>Metodo de Pago</h3>
+        <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <div class="row" style="text-align-last:center;">
+            <h3>Completa los datos</h3>
+        </div>
+        <div class="card-body login-content p-0">
+            <form [formGroup]="creditCardForm">
+                <div class="row">
+                    <div class="input-div one py-3">
+                        <div class="i">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div class="div">
+                            <input type="text" class="form-control" id="numCard" placeholder="numCard" formControlName="numCard" [ngClass]="{'is-invalid':creditPay['numCard'].errors}">
+                            <div class="my-3" style="color:red" *ngIf="creditPay['numCard'].errors">
+                                <div *ngIf="creditPay['numCard'].errors['required']">
+                                    Dirección no puede estar vacío
+                                </div>
+                                <div *ngIf="creditPay['numCard'].errors['minlength']">
+                                    Numero de tarjeta debe de tener 12 dígitos exactamente
+                                </div>
+                                <div *ngIf="creditPay['numCard'].errors['maxlength']">
+                                    Numero de tarjeta debe de tener 12 dígitos exactamente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-div one py-3">
+                        <div class="i">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="div">
+                            <input type="text" class="form-control" id="expiredDate" formControlName="expiredDate" placeholder="expiredDate" [ngClass]="{'is-invalid':creditPay['expiredDate'].errors}">
+                            <div class="my-3" style="color:red" *ngIf="creditPay['expiredDate'].errors">
+                                <div *ngIf="creditPay['expiredDate'].errors['required']">
+                                    Fecha de vencimiento no puede estar vacío
+                                </div>
+                                <div *ngIf="creditPay['expiredDate'].errors['minlength']">
+                                    Fecha de vencimiento debe de tener 5 caracteres exactamente
+                                </div>
+                                <div *ngIf="creditPay['expiredDate'].errors['maxlength']">
+                                    Fecha de vencimiento debe de tener 5 caracteres exactamente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-div one py-3">
+                        <div class="i">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div class="div">
+                            <input type="number" class="form-control" id="cvv" formControlName="CVV" placeholder="CVV" [ngClass]="{'is-invalid':creditPay['CVV'].errors}">
+                            <div class="my-3" style="color:red" *ngIf="creditPay['CVV'].errors">
+                                <div *ngIf="creditPay['CVV'].errors['required']">
+                                    CVV no puede estar vacío
+                                </div>
+                                <div *ngIf="creditPay['CVV'].errors['minlength']">
+                                    CVV debe de tener 3 dígitos exactamente
+                                </div>
+                                <div *ngIf="creditPay['CVV'].errors['maxlength']">
+                                    CVV debe de tener 3 dígitos exactamente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 p-3" style="justify-content: center;">
+                    <button type="button" [disabled]=creditCardForm.invalid class="btn btn-lux px-3" style="width: auto" (click)="cerrar(contentSuccess)">Pagar HNL {{order.total}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #contentSuccess let-modal style="border-radius: 25px;">
+    <div class="modal-header">
+        <button type="button" class="close px-3" aria-label="Close" (click)="closeAndRecharge()">
+        <span style="font-size: 30px" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="row" style="align-self: center; align-content: center">
+                <div class="col"></div>
+                <div class="col" style="text-align-last: center"><i class="far fa-check-circle fa-4x morad"></i></div>
+                <div class="col"></div>
+
+            </div>
+
+            <div class="row p-3" style="text-align: center">
+                <h2>¡Pago realizado exitosamente!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]=creditCardForm.invalid class="btn btn-lux px-3" style="width: auto" (click)="closeAndRecharge()">Cerrar</button>
+    </div>
+</ng-template>

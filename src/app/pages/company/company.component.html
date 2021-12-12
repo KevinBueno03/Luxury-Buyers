@@ -8,7 +8,7 @@
                 <a routerLink="/categories/companies" class="morad"><i class="fas fa-long-arrow-alt-left fa-2x"></i><span class="mb-0 px-1" style="font-size: x-large; align-self: center;">Empresas</span></a>
             </div>
             <div class="col-4" style="text-align:right; align-self: center;">
-                <button class="btn" [disabled]="!validKart" [ngClass]="{'btn-gris':validKart==false ,'btn-lux':validKart==true}" routerLink="/categories/companies/company/shopping-cart"><i class="fas fa-cart-plus fa-2x"><span class="text-muted dorad" *ngIf="orderSize>0" style="font-size: 21px; vertical-align: text-bottom;">{{orderSize}}</span></i></button>
+                <button class="btn" [disabled]="!validKart" [ngClass]="{'btn-gris':validKart==false ,'btn-lux':validKart==true}" routerLink="/categories/companies/company/shopping-cart" (click)="refresh()"><i class="fas fa-cart-plus fa-2x"><span class="text-muted dorad" *ngIf="orderSize>0" style="font-size: 21px; vertical-align: text-bottom;">{{orderSize}}</span></i></button>
             </div>
         </div>
         <hr>

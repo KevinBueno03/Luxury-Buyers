@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { COUNTRIES, Country } from 'src/app/interfaces/country.interface';
+import { Order } from 'src/app/interfaces/order.interface';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -11,19 +13,29 @@ export class OrdersComponent {
 
   page = 1;
   pageSize = 4;
-  collectionSize = COUNTRIES.length;
-  countries: Country[] = [];
+  collectionSize = 0;
 
-  constructor() {
-    this.refreshCountries();
+  orders:Order[] = [];
+  orders2:Order[] = [];
+
+  constructor(private router: Router, private OrderService: OrderService) {
+    this.OrderService.obtOrders()
+    .subscribe(data=>{
+      if(data){
+        this.orders=data;
+        this.orders2=data;
+        this.collectionSize = data.length;
+        this.refreshOrders();
+      }
+    })
   }
 
   ngOnInit(): void {
   }
 
-  refreshCountries() {
-    this.countries = COUNTRIES
-      .map((country, i) => ({id: i + 1, ...country}))
+  refreshOrders() {
+    this.orders = this.orders2
+      .map((order, i) => ({id: i + 1, ...order}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 

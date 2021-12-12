@@ -1,7 +1,7 @@
-<div style="margin-top: 70px">
+<div style="margin-top: 100px">
     <div class="" style="text-align: center; vertical-align: middle">
         <div class="login-content">
-            <form (submit)="registerForm" [formGroup]="registerForm">
+            <form [formGroup]="registerForm">
                 <div class="morad pt-4">
                     <h1>Registrate</h1>
                     <h4>¡Claro que tienes estilo...!</h4>
@@ -28,7 +28,7 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="div">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid':registerUsuario['email'].errors}">
+                        <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid':registerUsuario['email'].errors}">
                         <div class="my-3" style="color:red" *ngIf="registerUsuario['email'].errors">
                             <div *ngIf="registerUsuario['email'].errors['required']">
                                 Email no puede estar vacio
@@ -67,17 +67,43 @@
                             <div *ngIf="registerUsuario['confPass'].errors['required']">
                                 Password no puede estar vacío
                             </div>
-                            <div *ngIf="registerUsuario['confPass'].errors['MustMatch']">
-                                Las contraseñas deben coincidir
+                            <div *ngIf="registerUsuario['confPass'].errors['minlength']">
+                                La contraseña debe de tener 8 carecteres o más
                             </div>
                         </div>
                     </div>
                 </div>
                 <a class="pb-5">¿Olvidaste tu contraseña?</a>
-                <button type="submit" [disabled]=registerForm.invalid class="btn btn-lux" (click)="guardarBuyer()">Registrarme</button>
+                <button type="submit" [disabled]=registerForm.invalid class="btn btn-lux" (click)="guardarBuyer(content)">Registrarme</button>
                 <a class="morad mt-5" routerLink='/login' style="margin-top: 10px;">Ya tienes una cuenta? <span style="color: black; font-weight: bold">Iniciar Sesion
                 <i class="fas fa-arrow-right"></i></span> </a>
             </form>
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal style="border-radius: 25px;">
+    <div class="modal-header">
+        <button type="button" class="close px-3" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span style="font-size: 30px" aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="row" style="align-self: center; align-content: center">
+                <div class="col"></div>
+                <div class="col" style="text-align-last: center"><i class="far fa-check-circle fa-4x morad"></i></div>
+                <div class="col"></div>
+
+            </div>
+
+            <div class="row p-3" style="text-align: center">
+                <h2>¡Registro exitoso!</h2>
+                <h2>Enviamos un mensaje a tu correo, ve y verifica tu cuenta.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lux px-3" style="width: auto" (click)="closeAndRecharge()">Cerrar</button>
+    </div>
+</ng-template>

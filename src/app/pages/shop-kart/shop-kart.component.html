@@ -39,9 +39,9 @@
                                     <div class="col-3 px-0 mx-0" style="text-align:left; align-items: flex-start;">
                                         <div class="row px-0 align-items-center">
                                             <span style="display: inline-flex;">
-                                              <i class="fas fa-minus-square morad fa-2x" (click)="substractOne(prod.idProduct)"></i>
+                                              <a (onfocus)="refresh()"><i class="fas fa-minus-square morad fa-2x"  (click)="substractOne(prod.idProduct)"></i></a>
                                               <p class="text-muted morad px-1 m-0 cuadroButton">{{prod.amount}}</p>
-                                              <i class="fas fa-plus-square morad fa-2x" (click)="addOne(prod.idProduct)"></i>
+                                              <a (onfocus)="refresh()"><i class="fas fa-plus-square morad fa-2x" (click)="addOne(prod.idProduct)"></i></a>
                                             </span>
                                         </div>
                                     </div>
@@ -111,6 +111,9 @@
                 <div class="col-4">
                     <h2>{{order.total}}</h2>
                 </div>
+            </div>
+            <div class="row" style="place-content: center;">
+                <button type="button" routerLink="/categories/companies/company/shopping-cart/ubicacion" [disabled]="order.amountProducts<0" class="btn btn-lux px-4" style="width:auto;" (click)="paid()">Pagar</button>
             </div>
         </div>
     </div>

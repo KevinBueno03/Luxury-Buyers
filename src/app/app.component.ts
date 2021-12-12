@@ -7,7 +7,7 @@ import { OrderService } from './services/order.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Bikers';
+  title = 'Buyers';
 
   lS: string | null = localStorage.getItem('token');
   onBuyerLogged = false;
